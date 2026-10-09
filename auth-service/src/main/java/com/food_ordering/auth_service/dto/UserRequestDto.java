@@ -1,8 +1,9 @@
-package com.food_ordering.user_service.dto;
+package com.food_ordering.auth_service.dto;
 
 
-import com.food_ordering.user_service.entity.Role;
-import com.food_ordering.user_service.entity.Status;
+
+import com.food_ordering.auth_service.dto.enums.Role;
+import com.food_ordering.auth_service.dto.enums.Status;
 import lombok.Data;
 
 @Data
@@ -13,8 +14,5 @@ public class UserRequestDto {
     private Long phone;
     private Role role;
     private Status status;
-
-
-
 
 }

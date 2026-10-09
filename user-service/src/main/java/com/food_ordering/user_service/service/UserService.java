@@ -29,13 +29,19 @@ public class UserService {
     newUser.setPhone(userRequestDto.getPhone());
     newUser.setStatus(userRequestDto.getStatus());
     newUser.setPassword(userRequestDto.getPassword());
+    newUser.setUsername(userRequestDto.getUsername());
 
    User savedUser= userRepo.save(newUser);
+
+
     UserResponseDto userResponseDto=new UserResponseDto();
+
     userResponseDto.setEmail(savedUser.getEmail());
     userResponseDto.setStatus(savedUser.getStatus());
     userResponseDto.setUsername(savedUser.getUsername());
     userResponseDto.setRole(savedUser.getRole());
+    userResponseDto.setId(savedUser.getId());
+    userResponseDto.setPhone(savedUser.getPhone());
 
     return  userResponseDto;
 
