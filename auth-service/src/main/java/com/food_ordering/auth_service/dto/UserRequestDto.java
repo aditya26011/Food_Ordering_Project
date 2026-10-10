@@ -11,7 +11,7 @@ public class UserRequestDto {
     private String username;
     private String password;
     private String email;
-    private Long phone;
+    private String phone;
     private Role role;
     private Status status;
 

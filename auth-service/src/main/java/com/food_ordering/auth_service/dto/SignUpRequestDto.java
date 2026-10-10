@@ -11,7 +11,7 @@ public class SignUpRequestDto {
     private String email;
     private String password;
     private Status status;
-    private Long phone;
+    private String phone;
     private Role role;
 
 

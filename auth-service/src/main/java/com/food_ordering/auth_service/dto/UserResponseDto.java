@@ -12,5 +12,5 @@ public class UserResponseDto {
     private Long id;
     private Status status;
     private Role role;
-    private Long phone;
+    private String phone;
 }

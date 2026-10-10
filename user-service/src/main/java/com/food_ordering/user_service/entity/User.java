@@ -27,7 +27,7 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     private Role role;
 
-    private Long phone;
+    private String phone;
 
     @Enumerated(value = EnumType.STRING)
     private Status status;
