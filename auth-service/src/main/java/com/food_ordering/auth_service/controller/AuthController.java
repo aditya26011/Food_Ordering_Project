@@ -1,5 +1,7 @@
 package com.food_ordering.auth_service.controller;
 
+import com.food_ordering.auth_service.dto.LoginRequestDto;
+import com.food_ordering.auth_service.dto.LoginResponseDto;
 import com.food_ordering.auth_service.dto.SignUpRequestDto;
 import com.food_ordering.auth_service.dto.SignUpResponseDto;
 import com.food_ordering.auth_service.service.AuthService;
@@ -22,6 +24,12 @@ public class AuthController {
     ResponseEntity<SignUpResponseDto> signUp(@RequestBody SignUpRequestDto signUpRequestDto){
         SignUpResponseDto signUpResponseDto= authService.signUp(signUpRequestDto);
         return new ResponseEntity<>(signUpResponseDto, HttpStatus.OK);
+    }
+
+    @PostMapping("/login")
+    ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto){
+        LoginResponseDto loginResponseDto=authService.login(loginRequestDto);
+        return new ResponseEntity<>(loginResponseDto,HttpStatus.OK);
     }
 
 }

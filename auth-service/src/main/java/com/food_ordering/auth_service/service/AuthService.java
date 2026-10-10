@@ -1,14 +1,15 @@
 package com.food_ordering.auth_service.service;
 
+import com.food_ordering.auth_service.auth.AuthUser;
 import com.food_ordering.auth_service.client.UserClient;
-import com.food_ordering.auth_service.dto.SignUpRequestDto;
-import com.food_ordering.auth_service.dto.SignUpResponseDto;
-import com.food_ordering.auth_service.dto.UserRequestDto;
-import com.food_ordering.auth_service.dto.UserResponseDto;
+import com.food_ordering.auth_service.dto.*;
 import com.food_ordering.auth_service.dto.enums.Role;
 import com.food_ordering.auth_service.dto.enums.Status;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +20,8 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserClient userClient;
     private final ModelMapper modelMapper;
+    private final AuthenticationManager authenticationManager;
+    private final JwtService jwtService;
 
     public SignUpResponseDto signUp(SignUpRequestDto signUpRequestDto) {
 
@@ -35,7 +38,16 @@ public class AuthService {
       return  modelMapper.map(userResponseDto, SignUpResponseDto.class);
 
 
+    }
 
+    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
+     Authentication authentication=authenticationManager.authenticate( new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(),loginRequestDto.getPassword()));
+
+         AuthUser user = (AuthUser) authentication.getPrincipal();
+
+         String token=jwtService.generateToken(user);
+
+         return new LoginResponseDto(user.getId(),user.getUsername(),token);
 
     }
 }

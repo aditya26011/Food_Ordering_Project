@@ -1,5 +1,6 @@
 package com.food_ordering.user_service.service;
 
+import com.food_ordering.user_service.dto.AuthUserDto;
 import com.food_ordering.user_service.dto.UserRequestDto;
 import com.food_ordering.user_service.dto.UserResponseDto;
 import com.food_ordering.user_service.entity.Role;
@@ -44,6 +45,21 @@ public class UserService {
     userResponseDto.setPhone(savedUser.getPhone());
 
     return  userResponseDto;
+
+    }
+
+    public AuthUserDto getUserByEmail(String email) {
+     User user=userRepo.findByEmail(email).orElseThrow(()-> new RuntimeException("User not present"));
+
+      AuthUserDto authUserDto=new AuthUserDto();
+      authUserDto.setEmail(user.getEmail());
+      authUserDto.setId(user.getId());
+      authUserDto.setPassword(user.getPassword());
+      authUserDto.setUsername(user.getUsername());
+      authUserDto.setRole(user.getRole());
+
+      return authUserDto;
+
 
     }
 }
